@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1C3557">
+<title>광천 한우 특화거리 방문 의향 조사</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  :root {
+    --navy: #1C3557;
+    --navy-dark: #0F1F33;
+    --navy-mid: #2A4A72;
+    --gold: #C8902A;
+    --gold-light: #F5E8C8;
+    --gold-pale: #FDF6E8;
+    --cream: #F9F6F0;
+    --white: #FFFFFF;
+    --gray100: #F4F2EE;
+    --gray200: #E8E4DC;
+    --gray400: #B8B3A8;
+    --gray600: #6E6860;
+    --gray800: #3A3630;
+    --red: #C0392B;
+    --green: #2E7D52;
+    --green-light: #E8F5EE;
+    --r-sm: 8px;
+    --r-md: 12px;
+    --r-lg: 18px;
+    --r-xl: 24px;
+  }
+
+  html { font-size: 16px; }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--cream);
+    color: var(--gray800);
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    background: var(--navy-dark);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 110% 20%, rgba(200,144,42,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at -10% 80%, rgba(44,74,114,0.5) 0%, transparent 60%);
+  }
+  .cover-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: repeating-linear-gradient(
+      0deg, transparent, transparent 30px, rgba(255,255,255,1) 30px, rgba(255,255,255,1) 31px
+    ), repeating-linear-gradient(
+      90deg, transparent, transparent 30px, rgba(255,255,255,1) 30px, rgba(255,255,255,1) 31px
+    );
+  }
+  .cover-content {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 52px 28px 32px;
+  }
+  .cover-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(200,144,42,0.2);
+    border: 1px solid rgba(200,144,42,0.4);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 11px;
+    color: var(--gold-light);
+    letter-spacing: 0.04em;
+    margin-bottom: 28px;
+    width: fit-content;
+    animation: fadeUp 0.6s ease both;
+  }
+  .cover-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .cover-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .cover-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .cover-title em {
+    color: var(--gold);
+    font-style: normal;
+  }
+  .cover-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.75;
+    margin-bottom: 36px;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .cover-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 40px;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .cover-chip {
+    background: rgba(255,255,255,0.08);
+    border: 0.5px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .cover-chip svg { width: 12px; height: 12px; flex-shrink: 0; }
+  .cover-start {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--gold);
+    color: var(--navy-dark);
+    font-size: 15px;
+    font-weight: 700;
+    padding: 16px 24px;
+    border-radius: var(--r-lg);
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.15s;
+    letter-spacing: 0.02em;
+    animation: fadeUp 0.6s 0.5s ease both;
+  }
+  .cover-start:active { transform: scale(0.97); background: #B07A20; }
+  .cover-start svg { width: 18px; height: 18px; }
+  .cover-footer {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 16px 28px 32px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.6;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SURVEY ── */
+  .survey-wrap { display: none; min-height: 100vh; }
+  .survey-wrap.active { display: block; }
+
+  .survey-header {
+    background: var(--navy);
+    padding: 20px 20px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .header-section {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gold-light);
+    letter-spacing: 0.06em;
+  }
+  .header-count {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+  }
+  .prog-track {
+    height: 3px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .prog-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .page { display: none; padding: 20px 16px 32px; animation: slideIn 0.25s ease both; }
+  .page.active { display: block; }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  .q-block { margin-bottom: 16px; }
+  .q-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    padding: 18px 16px;
+    border: 1px solid var(--gray200);
+  }
+  .q-header { margin-bottom: 12px; }
+  .q-num-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .q-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .q-required {
+    font-size: 10px;
+    color: var(--red);
+    background: rgba(192,57,43,0.08);
+    border-radius: 10px;
+    padding: 2px 7px;
+    margin-left: auto;
+  }
+  .q-bc-tag {
+    font-size: 9px;
+    color: var(--green);
+    background: var(--green-light);
+    border-radius: 10px;
+    padding: 2px 7px;
+    margin-left: auto;
+    font-weight: 500;
+  }
+  .q-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray800);
+    line-height: 1.55;
+  }
+  .q-hint {
+    font-size: 11px;
+    color: var(--gray600);
+    background: var(--gray100);
+    border-radius: var(--r-sm);
+    padding: 7px 10px;
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+
+  /* Options */
+  .opt-list { display: flex; flex-direction: column; gap: 7px; }
+  .opt-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 11px 13px;
+    border: 1.5px solid var(--gray200);
+    border-radius: var(--r-md);
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--white);
+  }
+  .opt-item:active { transform: scale(0.98); }
+  .opt-item.selected {
+    border-color: var(--navy);
+    background: rgba(28,53,87,0.05);
+  }
+  .opt-item.selected .opt-dot { background: var(--navy); border-color: var(--navy); }
+  .opt-item.selected .opt-dot::after { opacity: 1; }
+  .opt-item.selected .opt-box { background: var(--navy); border-color: var(--navy); }
+  .opt-item.selected .opt-box::after { opacity: 1; }
+
+  .opt-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--gray400);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .opt-dot::after {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: white;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .opt-box {
+    width: 18px; height: 18px;
+    border-radius: 5px;
+    border: 2px solid var(--gray400);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+  .opt-box::after {
+    content: '';
+    width: 10px; height: 6px;
+    border: 2.5px solid white;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg) translateY(-1px);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .opt-label {
+    font-size: 13px;
+    color: var(--gray800);
+    line-height: 1.5;
+    flex: 1;
+  }
+  .opt-label strong { font-weight: 700; color: var(--navy); }
+
+  /* Sub card */
+  .sub-expand {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+  .sub-expand.open { max-height: 600px; }
+  .sub-card {
+    background: rgba(28,53,87,0.04);
+    border: 1px solid rgba(28,53,87,0.15);
+    border-radius: var(--r-md);
+    padding: 12px 13px;
+    margin-top: 10px;
+  }
+  .sub-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 9px;
+    letter-spacing: 0.02em;
+  }
+
+  /* Textarea */
+  textarea {
+    width: 100%;
+    border: 1.5px solid var(--gray200);
+    border-radius: var(--r-md);
+    padding: 12px 14px;
+    font-size: 13px;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: var(--gray800);
+    background: var(--white);
+    resize: none;
+    height: 90px;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.6;
+  }
+  textarea:focus { border-color: var(--navy); }
+  textarea::placeholder { color: var(--gray400); }
+
+  /* Nav */
+  .nav-row {
+    display: flex;
+    gap: 10px;
+    padding: 4px 16px 0;
+  }
+  .btn {
+    flex: 1;
+    padding: 14px 16px;
+    border-radius: var(--r-md);
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.12s, opacity 0.12s;
+    font-family: 'Noto Sans KR', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    letter-spacing: 0.01em;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-back {
+    background: var(--gray100);
+    color: var(--gray600);
+    flex: 0.6;
+  }
+  .btn-next {
+    background: var(--navy);
+    color: white;
+  }
+  .btn-submit {
+    background: var(--gold);
+    color: var(--navy-dark);
+    width: 100%;
+    flex: 1;
+  }
+  .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* section divider */
+  .section-sep {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 0 12px;
+  }
+  .section-sep-line { flex: 1; height: 1px; background: var(--gray200); }
+  .section-sep-text {
+    font-size: 10px;
+    color: var(--gray400);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  /* Error */
+  .err-msg {
+    font-size: 11px;
+    color: var(--red);
+    padding: 6px 10px;
+    background: rgba(192,57,43,0.07);
+    border-radius: var(--r-sm);
+    margin-top: 8px;
+    display: none;
+  }
+  .err-msg.show { display: block; }
+
+  /* DONE */
+  .done-screen {
+    min-height: 100vh;
+    background: var(--navy-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 24px 40px;
+    text-align: center;
+    display: none;
+  }
+  .done-screen.active { display: flex; }
+  .done-circle {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  .done-circle svg { width: 36px; height: 36px; color: var(--navy-dark); }
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  .done-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 12px;
+    animation: fadeUp 0.5s 0.2s ease both;
+  }
+  .done-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+    margin-bottom: 32px;
+    animation: fadeUp 0.5s 0.3s ease both;
+  }
+  .done-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--r-lg);
+    padding: 18px 20px;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 24px;
+    animation: fadeUp 0.5s 0.4s ease both;
+  }
+  .done-card-title {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .done-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    font-size: 12px;
+  }
+  .done-row:last-child { border-bottom: none; }
+  .done-key { color: rgba(255,255,255,0.5); flex-shrink: 0; }
+  .done-val { color: white; font-weight: 500; text-align: right; }
+  .done-note {
+    font-size: 10px;
+    color: rgba(255,255,255,0.28);
+    line-height: 1.8;
+    animation: fadeUp 0.5s 0.5s ease both;
+  }
+
+  /* Max width for larger screens */
+  @media (min-width: 480px) {
+    .cover-content, .cover-footer { max-width: 420px; margin: 0 auto; }
+    .survey-header, .page, .nav-row { max-width: 420px; margin-left: auto; margin-right: auto; }
+    .done-screen { max-width: 420px; margin: 0 auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ COVER ══ -->
+<div class="cover" id="cover">
+  <div class="cover-bg"></div>
+  <div class="cover-pattern"></div>
+  <div class="cover-content">
+    <div class="cover-badge">홍성군 광천읍 연구팀</div>
+    <div class="cover-eyebrow">방문객 수요 조사</div>
+    <div class="cover-title">광천 <em>한우 특화거리</em><br>조성을 위한 의견을<br>들려주세요</div>
+    <div class="cover-desc">
+      홍성군 광천읍 결성통 일대에<br>
+      축산물 특화거리 조성을 검토하고 있습니다.<br>
+      여러분의 의견이 실제 계획에 반영됩니다.
+    </div>
+    <div class="cover-meta">
+      <span class="cover-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        약 5분 소요
+      </span>
+      <span class="cover-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        익명 처리
+      </span>
+      <span class="cover-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+        외지 방문객 대상
+      </span>
+    </div>
+    <button class="cover-start" onclick="startSurvey()">
+      조사 시작하기
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+  <div class="cover-footer">
+    본 조사는 연구 목적으로만 활용되며<br>
+    개인정보는 수집·저장되지 않습니다
+  </div>
+</div>
+
+<!-- ══ SURVEY ══ -->
+<div class="survey-wrap" id="surveyWrap">
+  <div class="survey-header">
+    <div class="header-row">
+      <span class="header-section" id="sectionLabel">기본 정보</span>
+      <span class="header-count" id="pageCount">1 / 4</span>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  </div>
+
+  <!-- PAGE 1 — 기본정보 -->
+  <div class="page active" id="page1">
+    <div class="q-block">
+      <div class="q-card">
+        <div class="q-header">
+          <div class="q-num-row">
+            <span class="q-num">1</span>
+            <span class="q-required">필수</span>
+          </div>
+          <div class="q-text">현재 거주하시는 지역을 선택해 주세요.</div>
+        </div>
+        <div class="opt-list" id="q1">
+          <div class="opt-item" data-q="q1" data-val="홍성군(광천읍 제외)"><span class="opt-dot"></span><span class="opt-label">홍성군 (광천읍 제외)</span></div>
+          <div class="opt-item" data-q="q1" data-val="보령시"><span class="opt-dot"></span><span class="opt-label">보령시</span></div>
+          <div class="opt-item" data-q="q1" data-val="예산군"><span class="opt-dot"></span><span class="opt-label">예산군</span></div>
+          <div class="opt-item" data-q="q1" data-val="서산·태안·당진"><span class="opt-dot"></span><span class="opt-label">서산·태안·당진</span></div>
+          <div class="opt-item" data-q="q1" data-val="대전·세종·충남기타"><span class="opt-dot"></span><span class="opt-label">대전·세종·충남 기타</span></div>
+          <div class="opt-item" data-q="q1" data-val="수도권"><span class="opt-dot"></span><span class="opt-label">수도권 (서울·경기·인천)</span></div>
+          <div class="opt-item" data-q="q1" data-val="기타지역"><span class="opt-dot"></span><span class="opt-label">기타 지역</span></div>
+        </div>
+        <div class="err-msg" id="err1">거주 지역을 선택해 주세요.</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-card">
+        <div class="q-header">
+          <div class="q-num-row">
+            <span class="q-num">2</span>
+            <span class="q-required">필수</span>
+          </div>
+          <div class="q-text">오늘 광천을 방문한 목적은? <span style="font-size:11px;color:#888">(복수 선택 가능)</span></div>
+        </div>
+        <div class="opt-list" id="q2">
+          <div class="opt-item" data-q="q2" data-multi="true"><span class="opt-box"></span><span class="opt-label">새우젓·광천김 등 특산물 구매</span></div>
+          <div class="opt-item" data-q="q2" data-multi="true"><span class="opt-box"></span><span class="opt-label">오서산 등산·수목원 방문</span></div>
+          <div class="opt-item" data-q="q2" data-multi="true"><span class="opt-box"></span><span class="opt-label">광천전통시장·문화시장 구경</span></div>
+          <div class="opt-item" data-q="q2" data-multi="true"><span class="opt-box"></span><span class="opt-label">지인·가족 방문</span></div>
+          <div class="opt-item" data-q="q2" data-multi="true"><span class="opt-box"></span><span class="opt-label">업무·출장</span></div>
+          <div class="opt-item" data-q="q2" data-multi="true"><span class="opt-box"></span><span class="opt-label">단순 통과 (다른 목적지 경유)</span></div>
+          <div class="opt-item" data-q="q2" data-multi="true"><span class="opt-box"></span><span class="opt-label">기타</span></div>
+        </div>
+        <div class="err-msg" id="err2">방문 목적을 하나 이상 선택해 주세요.</div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn btn-next" onclick="nextPage(1)">
+        다음
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- PAGE 2 — 홍성한우 인식 -->
+  <div class="page" id="page2">
+    <div class="q-block">
+      <div class="q-card">
+        <div class="q-header">
+          <div class="q-num-row">
+            <span class="q-num">3</span>
+            <span class="q-required">필수</span>
+          </div>
+          <div class="q-text">홍성한우에 대해 알고 계신가요?</div>
+        </div>
+        <div class="q-hint">💡 홍성군은 군 단위 전국 1위 한우 생산지입니다 (사육두수 5.6만두, 2025 MBC 추석특집 '전국1등' 우승)</div>
+        <div class="opt-list" id="q3">
+          <div class="opt-item" data-q="q3" data-val="잘 알고 있고 먹어봤다"><span class="opt-dot"></span><span class="opt-label">잘 알고 있고, 먹어봤다</span></div>
+          <div class="opt-item" data-q="q3" data-val="잘 알고 있지만 먹어본 적 없다"><span class="opt-dot"></span><span class="opt-label">잘 알고 있지만, 먹어본 적 없다</span></div>
+          <div class="opt-item" data-q="q3" data-val="이름은 들어봤고 먹어봤다"><span class="opt-dot"></span><span class="opt-label">이름은 들어봤고, 먹어봤다</span></div>
+          <div class="opt-item" data-q="q3" data-val="이름은 들어봤지만 먹어본 적 없다"><span class="opt-dot"></span><span class="opt-label">이름은 들어봤지만, 먹어본 적 없다</span></div>
+          <div class="opt-item" data-q="q3" data-val="처음 들어봤다"><span class="opt-dot"></span><span class="opt-label">처음 들어봤다</span></div>
+        </div>
+        <div class="err-msg" id="err3">선택해 주세요.</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-card">
+        <div class="q-header">
+          <div class="q-num-row"><span class="q-num">4</span></div>
+          <div class="q-text">광시한우거리(예산군)에 가보신 적 있나요?</div>
+        </div>
+        <div class="opt-list" id="q4">
+          <div class="opt-item" data-q="q4" data-val="있다" data-sub="sub4"><span class="opt-dot"></span><span class="opt-label">있다</span></div>
+          <div class="opt-item" data-q="q4" data-val="없다"><span class="opt-dot"></span><span class="opt-label">없다</span></div>
+          <div class="opt-item" data-q="q4" data-val="모른다"><span class="opt-dot"></span><span class="opt-label">광시한우거리를 모른다</span></div>
+        </div>
+        <div class="sub-expand" id="sub4">
+          <div class="sub-card">
+            <div class="sub-label">광시와 비교해 광천 결성통이 더 나아야 할 점은? (복수 선택)</div>
+            <div class="opt-list" id="q4s">
+              <div class="opt-item" data-q="q4s" data-multi="true"><span class="opt-box"></span><span class="opt-label">가격이 더 저렴해야 한다</span></div>
+              <div class="opt-item" data-q="q4s" data-multi="true"><span class="opt-box"></span><span class="opt-label">대중교통으로 오기 편해야 한다</span></div>
+              <div class="opt-item" data-q="q4s" data-multi="true"><span class="opt-box"></span><span class="opt-label">주차가 더 편해야 한다</span></div>
+              <div class="opt-item" data-q="q4s" data-multi="true"><span class="opt-box"></span><span class="opt-label">더 다양한 메뉴·체험이 있어야 한다</span></div>
+              <div class="opt-item" data-q="q4s" data-multi="true"><span class="opt-box"></span><span class="opt-label">홍성한우 브랜드 신뢰가 명확해야 한다</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn btn-back" onclick="prevPage(2)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        이전
+      </button>
+      <button class="btn btn-next" onclick="nextPage(2)">
+        다음
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- PAGE 3 — 방문의향·소비규모 -->
+  <div class="page" id="page3">
+    <div class="q-hint" style="margin-bottom:14px;padding:9px 13px;background:rgba(44,125,82,0.08);border:1px solid rgba(44,125,82,0.2);border-radius:10px;font-size:11px;color:#2E7D52;line-height:1.6">
+      📊 이 페이지 응답은 경제성 분석(B/C 분석)의 핵심 근거로 활용됩니다
+    </div>
+    <div class="q-block">
+      <div class="q-card">
+        <div class="q-header">
+          <div class="q-num-row">
+            <span class="q-num">5</span>
+            <span class="q-required">필수</span>
+          </div>
+          <div class="q-text">한우 정육식당 10개 이상이 모인 결성통 특화거리가 생긴다면, 방문할 의향이 있으신가요?</div>
+        </div>
+        <div class="opt-list" id="q5">
+          <div class="opt-item" data-q="q5" data-val="반드시 갈 것이다"><span class="opt-dot"></span><span class="opt-label">반드시 갈 것이다</span></div>
+          <div class="opt-item" data-q="q5" data-val="아마 갈 것이다"><span class="opt-dot"></span><span class="opt-label">아마 갈 것이다</span></div>
+          <div class="opt-item" data-q="q5" data-val="모르겠다"><span class="opt-dot"></span><span class="opt-label">모르겠다</span></div>
+          <div class="opt-item" data-q="q5" data-val="아마 안 갈 것이다"><span class="opt-dot"></span><span class="opt-label">아마 안 갈 것이다</span></div>
+          <div class="opt-item" data-q="q5" data-val="절대 안 갈 것이다"><span class="opt-dot"></span><span class="opt-label">절대 안 갈 것이다</span></div>
+        </div>
+        <div class="err-msg" id="err5">방문 의향을 선택해 주세요.</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-card">
+        <div class="q-header">
+          <div class="q-num-row">
+            <span class="q-num">6</span>
+            <span class="q-required">필수</span>
+          </div>
+          <div class="q-text">방문 시 1인 기준 예상 지출 금액은?</div>
+        </div>
+        <div class="q-hint">식사 + 음료 + 정육 쇼핑 합산 기준</div>
+        <div class="opt-list" id="q6">
+          <div class="opt-item" data-q="q6" data-val="2만원 미만"><span class="opt-dot"></span><span class="opt-label">2만원 미만</span></div>
+          <div class="opt-item" data-q="q6" data-val="2~3만원"><span class="opt-dot"></span><span class="opt-label">2만~3만원</span></div>
+          <div class="opt-item" data-q="q6" data-val="3~5만원"><span class="opt-dot"></span><span class="opt-label">3만~5만원</span></div>
+          <div class="opt-item" data-q="q6" data-val="5~8만원"><span class="opt-dot"></span><span class="opt-label">5만~8만원 <span style="font-size:11px;color:#888">(현재 광천읍 평균)</span></span></div>
+          <div class="opt-item" data-q="q6" data-val="8~12만원"><span class="opt-dot"></span><span class="opt-label">8만~12만원</span></div>
+          <div class="opt-item" data-q="q6" data-val="12만원 이상"><span class="opt-dot"></span><span class="opt-label">12만원 이상</span></div>
+        </div>
+        <div class="err-msg" id="err6">예상 지출을 선택해 주세요.</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-card">
+        <div class="q-header">
+          <div class="q-num-row"><span class="q-num">6-1</span></div>
+          <div class="q-text">1년에 몇 번 정도 방문하실 것 같나요?</div>
+        </div>
+        <div class="opt-list" id="q61">
+          <div class="opt-item" data-q="q61" data-val="1회"><span class="opt-dot"></span><span class="opt-label">1회 (한 번 가보고 끝)</span></div>
+          <div class="opt-item" data-q="q61" data-val="2~3회"><span class="opt-dot"></span><span class="opt-label">2~3회 (계절마다)</span></div>
+          <div class="opt-item" data-q="q61" data-val="4~6회"><span class="opt-dot"></span><span class="opt-label">4~6회 (두 달에 한 번)</span></div>
+          <div class="opt-item" data-q="q61" data-val="7회 이상"><span class="opt-dot"></span><span class="opt-label">7회 이상 (자주 갈 것 같다)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn btn-back" onclick="prevPage(3)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 19"/></svg>
+        이전
+      </button>
+      <button class="btn btn-next" onclick="nextPage(3)">
+        다음
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- PAGE 4 — 방문조건·콘셉트·자유의견 -->
+  <div class="page" id="page4">
+    <div class="q-block">
+      <div class="q-card">
+        <div class="q-header">
+          <div class="q-num-row"><span class="q-num">7</span></div>
+          <div class="q-text">방문을 위해 반드시 갖춰져야 할 조건은? <span style="font-size:11px;color:#888">(최대 3개)</span></div>
+        </div>
+        <div class="opt-list" id="q7">
+          <div class="opt-item" data-q="q7" data-multi="true" data-max="3"><span class="opt-box"></span><span class="opt-label">충분한 주차 공간</span></div>
+          <div class="opt-item" data-q="q7" data-multi="true" data-max="3"><span class="opt-box"></span><span class="opt-label">가격 적정성 (2인 10만원 이내)</span></div>
+          <div class="opt-item" data-q="q7" data-multi="true" data-max="3"><span class="opt-box"></span><span class="opt-label">홍성한우 인증·신뢰 표시</span></div>
+          <div class="opt-item" data-q="q7" data-multi="true" data-max="3"><span class="opt-box"></span><span class="opt-label">깨끗하고 쾌적한 거리 환경</span></div>
+          <div class="opt-item" data-q="q7" data-multi="true" data-max="3"><span class="opt-box"></span><span class="opt-label">SNS 후기·유명세</span></div>
+          <div class="opt-item" data-q="q7" data-multi="true" data-max="3"><span class="opt-box"></span><span class="opt-label">가족 동반 가능한 공간</span></div>
+          <div class="opt-item" data-q="q7" data-multi="true" data-max="3"><span class="opt-box"></span><span class="opt-label">대중교통 접근성 (광천역 도보)</span></div>
+          <div class="opt-item" data-q="q7" data-multi="true" data-max="3"><span class="opt-box"></span><span class="opt-label">정육 판매 (사가지고 갈 수 있는 구조)</span></div>
+          <div class="opt-item" data-q="q7" data-multi="true" data-max="3"><span class="opt-box"></span><span class="opt-label">새우젓·광천김 등 특산물 연계</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-card">
+        <div class="q-header">
+          <div class="q-num-row"><span class="q-num">8</span></div>
+          <div class="q-text">가장 매력적으로 느껴지는 특화거리 콘셉트는?</div>
+        </div>
+        <div class="opt-list" id="q8">
+          <div class="opt-item" data-q="q8" data-val="A.정육식당형">
+            <span class="opt-dot"></span>
+            <span class="opt-label"><strong>A. 정육식당형</strong><br><span style="font-size:11px;color:#888">정육점+식당 겸업, 고기 직접 골라 구워 먹는 로컬 감성</span></span>
+          </div>
+          <div class="opt-item" data-q="q8" data-val="B.미식특화형">
+            <span class="opt-dot"></span>
+            <span class="opt-label"><strong>B. 미식 특화형</strong><br><span style="font-size:11px;color:#888">홍성한우 브랜드 레스토랑, 현대적 공간, SNS 포토존</span></span>
+          </div>
+          <div class="opt-item" data-q="q8" data-val="C.복합체험형">
+            <span class="opt-dot"></span>
+            <span class="opt-label"><strong>C. 복합 체험형</strong><br><span style="font-size:11px;color:#888">정육+식당+발골체험+광천 특산물숍 복합 구성</span></span>
+          </div>
+          <div class="opt-item" data-q="q8" data-val="D.야시장이벤트형">
+            <span class="opt-dot"></span>
+            <span class="opt-label"><strong>D. 야시장·이벤트형</strong><br><span style="font-size:11px;color:#888">저녁 야시장, 광천 미트 페스티벌 중심, 활기찬 분위기</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-card">
+        <div class="q-header">
+          <div class="q-num-row"><span class="q-num">9</span></div>
+          <div class="q-text">꼭 있었으면 하는 것이나, 이렇게 해줬으면 하는 점을 자유롭게 적어 주세요.</div>
+        </div>
+        <textarea id="q9" placeholder="예: 어린이 놀이공간이 있으면 가족이 오기 좋을 것 같아요&#10;광천김 BBQ 메뉴가 있으면 차별화될 것 같아요"></textarea>
+      </div>
+    </div>
+    <div class="nav-row">
+      <button class="btn btn-back" onclick="prevPage(4)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 19"/></svg>
+        이전
+      </button>
+      <button class="btn btn-submit" onclick="submitSurvey()">
+        제출하기
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DONE ══ -->
+<div class="done-screen" id="doneScreen">
+  <div class="done-circle">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div class="done-title">응답 완료!</div>
+  <div class="done-sub">소중한 의견 감사합니다.<br>여러분의 응답이 광천읍<br>한우 특화거리 기본계획에 반영됩니다.</div>
+  <div class="done-card">
+    <div class="done-card-title">내 응답 요약</div>
+    <div id="doneRows"></div>
+  </div>
+  <div class="done-note">
+    본 조사는 연구 목적으로만 활용되며<br>
+    개인정보는 수집·저장되지 않습니다.<br>
+    홍성군 광천읍 경제 활성화 연구팀
+  </div>
+</div>
+
+<script>
+const answers = {};
+const sections = ['', '기본 정보', '홍성한우 인식', '방문 의향·소비 규모', '방문 조건·콘셉트'];
+const totalPages = 4;
+
+function startSurvey() {
+  document.getElementById('cover').style.display = 'none';
+  document.getElementById('surveyWrap').classList.add('active');
+  updateHeader(1);
+}
+
+function updateHeader(page) {
+  document.getElementById('sectionLabel').textContent = sections[page] || '';
+  document.getElementById('pageCount').textContent = page + ' / ' + totalPages;
+  const pct = Math.round(((page - 1) / totalPages) * 100);
+  document.getElementById('progFill').style.width = pct + '%';
+}
+
+function showPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const el = document.getElementById('page' + n);
+  if (el) { el.classList.add('active'); window.scrollTo(0,0); }
+  updateHeader(n);
+}
+
+function nextPage(cur) {
+  if (cur === 1) {
+    const e1 = document.getElementById('err1');
+    const e2 = document.getElementById('err2');
+    let ok = true;
+    if (!answers.q1) { e1.classList.add('show'); ok = false; } else e1.classList.remove('show');
+    if (!answers.q2 || answers.q2.length === 0) { e2.classList.add('show'); ok = false; } else e2.classList.remove('show');
+    if (!ok) return;
+  }
+  if (cur === 2) {
+    const e3 = document.getElementById('err3');
+    if (!answers.q3) { e3.classList.add('show'); return; }
+    e3.classList.remove('show');
+  }
+  if (cur === 3) {
+    const e5 = document.getElementById('err5');
+    const e6 = document.getElementById('err6');
+    let ok = true;
+    if (!answers.q5) { e5.classList.add('show'); ok = false; } else e5.classList.remove('show');
+    if (!answers.q6) { e6.classList.add('show'); ok = false; } else e6.classList.remove('show');
+    if (!ok) return;
+  }
+  showPage(cur + 1);
+}
+
+function prevPage(cur) { showPage(cur - 1); }
+
+document.addEventListener('click', function(e) {
+  const item = e.target.closest('.opt-item');
+  if (!item) return;
+  const qId = item.dataset.q;
+  const isMulti = item.dataset.multi === 'true';
+  const maxSel = parseInt(item.dataset.max) || 999;
+  const val = item.dataset.val || item.querySelector('.opt-label').textContent.trim();
+  const subId = item.dataset.sub;
+
+  if (isMulti) {
+    const curSel = document.querySelectorAll('[data-q="' + qId + '"].selected').length;
+    if (!item.classList.contains('selected') && curSel >= maxSel) return;
+    item.classList.toggle('selected');
+    const box = item.querySelector('.opt-box');
+    if (box) {
+      if (item.classList.contains('selected')) box.classList.add('selected-inner');
+      else box.classList.remove('selected-inner');
+    }
+    if (!answers[qId]) answers[qId] = [];
+    if (item.classList.contains('selected')) {
+      if (!answers[qId].includes(val)) answers[qId].push(val);
+    } else {
+      answers[qId] = answers[qId].filter(v => v !== val);
+    }
+  } else {
+    document.querySelectorAll('[data-q="' + qId + '"]').forEach(el => {
+      el.classList.remove('selected');
+      const d = el.querySelector('.opt-dot');
+      if (d) d.classList.remove('selected-inner');
+      if (el.dataset.sub) {
+        const s = document.getElementById(el.dataset.sub);
+        if (s) s.classList.remove('open');
+      }
+    });
+    item.classList.add('selected');
+    const dot = item.querySelector('.opt-dot');
+    if (dot) dot.classList.add('selected-inner');
+    answers[qId] = val;
+    if (subId) {
+      const subEl = document.getElementById(subId);
+      if (subEl) subEl.classList.add('open');
+    }
+  }
+});
+
+function submitSurvey() {
+  answers.q9 = document.getElementById('q9').value.trim();
+  const rows = [
+    ['거주 지역', answers.q1 || '-'],
+    ['방문 목적', Array.isArray(answers.q2) ? answers.q2.join(', ') : (answers.q2 || '-')],
+    ['홍성한우 인지', answers.q3 || '-'],
+    ['방문 의향', answers.q5 || '-'],
+    ['예상 지출', answers.q6 || '-'],
+    ['연간 방문 횟수', answers.q61 || '-'],
+    ['선호 콘셉트', answers.q8 || '-'],
+  ];
+  const box = document.getElementById('doneRows');
+  box.innerHTML = rows.map(([k,v]) =>
+    '<div class="done-row"><span class="done-key">' + k + '</span><span class="done-val">' + v + '</span></div>'
+  ).join('');
+  document.getElementById('surveyWrap').classList.remove('active');
+  document.getElementById('doneScreen').classList.add('active');
+  window.scrollTo(0,0);
+  document.getElementById('progFill').style.width = '100%';
+}
+</script>
+</body>
+</html>
